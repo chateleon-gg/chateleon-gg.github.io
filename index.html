@@ -4,3 +4,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
+<script>
+    const Token = localStorage.getItem('AccountToken')
+    if (not Token) {
+        location.href = '/signup';
+    }
+</script>
