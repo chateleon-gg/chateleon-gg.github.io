@@ -6,8 +6,8 @@
 </head>
 
 <script>
-    const Token = localStorage.getItem('AccountToken')
-    if (not Token) {
-        location.href = '/signup';
+    let _Token = localStorage.getItem('AccountToken')
+    if (!_Token) {
+        location.href = '/signup?return=' + encodeURIComponent(location.href);
     }
 </script>
