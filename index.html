@@ -10,6 +10,6 @@
 
     if (!_Token) {
         let localPath = location.pathname + location.search;
-        location.href = '/signup?redirect=' + encodeURIComponent(localPath);
+        location.href = '/signup?return=' + encodeURIComponent(localPath);
     }
 </script>
