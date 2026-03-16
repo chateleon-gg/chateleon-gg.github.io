@@ -7,11 +7,14 @@
 
 
 <div class="container">
-    <label id="errmsg" style="font-size: 12px; color: rgb(255,125,125)">Error 204</label>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username">
+    
     <label for="password">Password:</label>
     <input type="text" id="password" name="password">
+    
+    <label id="errmsg" style="font-size: 12px; color: rgb(255,125,125)"></label>
+    
     <button id="login button">Sign Up</button>
 </div>
 
@@ -19,17 +22,39 @@
 <script>
     const usname = document.getElementById("username")
     const psword = document.getElementById("password")
-    const login = document.getElementById("login button")
+    const button = document.getElementById("login button")
+    const errmsg = document.getElementById("errmsg")
 
+    const errors = {
+        digitreq: 'Password must contain at least one digit',
+        passlen: 'Password must be at least 8 characters long',
+        invuser: 'Invalid Username!',
+        invpass: 'Invalid Password!',
+    };
 
     async function usnameChanged() {
-        usname.value = usname.value.replace(/[^a-zA-Z0-9]/g, "");
-        usname.value = usname.value.substring(0,19)
+        errmsg.value = ''
+        
+        const value = usname.value
+        usname.value = value.replace(/[^a-zA-Z0-9]/g, "");
+        usname.value = value.substring(0,19)
     }
     async function pswordChanged() {
-        psword.value = psword.value.substring(0,49)
+        errmsg.value = ''
+        
+        const value = usname.value
+        psword.value = value.substring(0,49)
     }
     usname.addEventListener('input', usnameChanged)
     psword.addEventListener('input', pswordChanged)
-    login.addEventListener('input', pswordChanged)
+    
+    button.addEventListener('click', function() {
+        const username = usname.value
+        const password = psword.value
+
+        if (!/\d/.test(password)) {
+            errmsg.value = 'Password must contain at least one digit'
+            return
+        } else if (
+    })
 </script>
