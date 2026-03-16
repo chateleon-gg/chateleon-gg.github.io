@@ -55,6 +55,15 @@
         if (!/\d/.test(password)) {
             errmsg.value = 'Password must contain at least one digit'
             return
-        } else if (
+        } else if (password.length < 8) {
+            errmsg.value = 'Password must be at least 8 characters long.\nHaving your password more than 20 characters long is recommended.'
+            return 
+        } else if (username == '') {
+            errmsg.value = 'Invalid Username'
+            return 
+        } else if (password == '') {
+            errmsg.value = 'Invalid Password'
+            return
+        }
     })
 </script>
