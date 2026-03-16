@@ -6,8 +6,10 @@
 </head>
 
 <script>
-    let _Token = localStorage.getItem('AccountToken')
+    let _Token = localStorage.getItem('AccountToken');
+
     if (!_Token) {
-        location.href = '/signup?return=' + encodeURIComponent(location.href);
+        let localPath = location.pathname + location.search;
+        location.href = '/signup?redirect=' + encodeURIComponent(localPath);
     }
 </script>
