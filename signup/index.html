@@ -42,14 +42,14 @@
         const username = usname.value
         const password = psword.value
 
-        if (!/\d/.test(password)) {
-            errmsg.textContent = 'Password must contain at least one digit'
-        } else if (password.length < 8) {
-            errmsg.textContent = 'Password must be at least 8 characters long.\nHaving your password more than 20 characters long is recommended.'
-        } else if (username == '') {
+        if (username == '') {
             errmsg.textContent = 'Invalid Username'
         } else if (password == '') {
             errmsg.textContent = 'Invalid Password'
+        } else if (!/\d/.test(password)) {
+            errmsg.textContent = 'Password must contain at least one digit'
+        } else if (password.length < 8) {
+            errmsg.textContent = 'Although the password length requirement is 8 characters, having your password more than 20 characters long is recommended.'
         } else {
             errmsg.textContent = ''
             console.log(username + ':' + password)
