@@ -1,0 +1,57 @@
+<style>
+    input, button {
+        width: 220px;
+        height: 30px;
+        font-size: 18px;
+    }
+
+    input {
+        border: 1px solid rgb(52, 66, 54);
+        background-color:rgb(33, 44, 35);
+                color: rgb(255,255,255);
+    }
+
+    button {
+        background-color: #34db7a;
+        color: rgb(0, 0, 0);
+        cursor: pointer;
+        border: none;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    button:hover {
+  /* Scale the button to 1.1 times its original size on hover */
+  transform: scale(1.01);
+  background-color: #7bf1ac; /* Change background color */
+}
+
+    button:active {
+  /* Scale down slightly when clicked */
+  background-color: #388558; /* Change background color */
+  transform: scale(0.99);
+}
+
+    label {
+        font-size: 20px;
+        color: rgb(255,255,255);
+    }
+
+    body {
+        background-color:rgb(20, 27, 21)
+    }
+
+    body, label, input, button {
+        font-family: "Fredoka", sans-serif;
+        border-radius: 12px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        gap: 10px;
+    }
+   
+</style>
