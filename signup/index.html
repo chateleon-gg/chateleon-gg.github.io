@@ -25,24 +25,17 @@
     const button = document.getElementById("login button")
     const errmsg = document.getElementById("errmsg")
 
-    const errors = {
-        digitreq: 'Password must contain at least one digit',
-        passlen: 'Password must be at least 8 characters long',
-        invuser: 'Invalid Username!',
-        invpass: 'Invalid Password!',
-    };
-
     async function usnameChanged() {
-        errmsg.value = ''
+        errmsg.textContent = ''
         
         const value = usname.value
         usname.value = value.replace(/[^a-zA-Z0-9]/g, "");
         usname.value = value.substring(0,19)
     }
     async function pswordChanged() {
-        errmsg.value = ''
+        errmsg.textContent = ''
         
-        const value = usname.value
+        const value = psword.value
         psword.value = value.substring(0,49)
     }
     usname.addEventListener('input', usnameChanged)
@@ -53,16 +46,16 @@
         const password = psword.value
 
         if (!/\d/.test(password)) {
-            errmsg.value = 'Password must contain at least one digit'
+            errmsg.textContent = 'Password must contain at least one digit'
             return
         } else if (password.length < 8) {
-            errmsg.value = 'Password must be at least 8 characters long.\nHaving your password more than 20 characters long is recommended.'
+            errmsg.textContent = 'Password must be at least 8 characters long.\nHaving your password more than 20 characters long is recommended.'
             return 
         } else if (username == '') {
-            errmsg.value = 'Invalid Username'
+            errmsg.textContent = 'Invalid Username'
             return 
         } else if (password == '') {
-            errmsg.value = 'Invalid Password'
+            errmsg.textContent = 'Invalid Password'
             return
         }
     })
