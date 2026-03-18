@@ -1,20 +1,75 @@
 <head>
     <title>Chateleon</title>
-    <link rel="icon" href="../images/ChateleonLogo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+
+
+<style>
+    input, button {
+        width: 220px;
+        height: 30px;
+        font-size: 18px;
+    }
+
+    input {
+        border: 1px solid rgb(52, 66, 54);
+        background-color:rgb(33, 44, 35);
+                color: rgb(255,255,255);
+    }
+
+    button {
+        background-color: #34db7a;
+        color: rgb(0, 0, 0);
+        cursor: pointer;
+        border: none;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    button:hover {
+  /* Scale the button to 1.1 times its original size on hover */
+  transform: scale(1.01);
+  background-color: #7bf1ac; /* Change background color */
+}
+
+    button:active {
+  /* Scale down slightly when clicked */
+  background-color: #388558; /* Change background color */
+  transform: scale(0.99);
+}
+
+    label {
+        font-size: 20px;
+        color: rgb(255,255,255);
+    }
+
+    body {
+        background-color:rgb(20, 27, 21)
+    }
+
+    body, label, input, button {
+        font-family: "Fredoka", sans-serif;
+        border-radius: 12px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        gap: 10px;
+    }
+   
+</style>
+
+
 </head>
 
 
 <div class="container">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username">
-    
     <label for="password">Password:</label>
     <input type="text" id="password" name="password">
-    
-    <label id="errmsg" style="font-size: 12px; color: rgb(255,125,125)"></label>
-    
     <button id="login button">Sign Up</button>
 </div>
 
@@ -22,37 +77,51 @@
 <script>
     const usname = document.getElementById("username")
     const psword = document.getElementById("password")
-    const button = document.getElementById("login button")
-    const errmsg = document.getElementById("errmsg")
+    const login = document.getElementById("login button")
+
 
     async function usnameChanged() {
-        errmsg.textContent = ''
         usname.value = usname.value.replace(/[^a-zA-Z0-9]/g, "");
         usname.value = usname.value.substring(0,19)
     }
     async function pswordChanged() {
-        errmsg.textContent = ''
-
         psword.value = psword.value.substring(0,49)
     }
     usname.addEventListener('input', usnameChanged)
     psword.addEventListener('input', pswordChanged)
-    
-    button.addEventListener('click', function() {
-        const username = usname.value
-        const password = psword.value
+login.addEventListener('click', async function() {
+    const username = usname.value;
+    const password = psword.value;
 
-        if (username == '') {
-            errmsg.textContent = 'Invalid Username'
-        } else if (password == '') {
-            errmsg.textContent = 'Invalid Password'
-        } else if (!/\d/.test(password)) {
-            errmsg.textContent = 'Password must contain at least one digit'
-        } else if (password.length < 8) {
-            errmsg.textContent = 'Although the password length requirement is 8 characters, having your password more than 20 characters long is recommended.'
+    // Local validation for instant feedback
+    if (username === '') {
+        errmsg.textContent = 'Invalid Username';
+        return;
+    } 
+    if (password.length < 8 || !/\d/.test(password)) {
+        errmsg.textContent = 'Password must be 8+ chars with at least one digit.';
+        return;
+    }
+
+    try {
+        const response = await fetch('http://YOUR_VPS_IP:3000/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            errmsg.style.color = 'lightgreen';
+            errmsg.textContent = "Account created!";
         } else {
-            errmsg.textContent = ''
-            console.log(username + ':' + password)
+            // This shows the error message we defined in the backend
+            errmsg.style.color = 'rgb(255,125,125)';
+            errmsg.textContent = data.error;
         }
-    })
+    } catch (err) {
+        errmsg.textContent = "Server is offline.";
+    }
+});
 </script>
